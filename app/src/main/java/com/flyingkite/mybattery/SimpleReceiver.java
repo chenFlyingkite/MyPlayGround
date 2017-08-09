@@ -18,12 +18,12 @@ public class SimpleReceiver extends BroadcastReceiver {
     }
 
     private void log(String format, Object... param) {
-        Say.LogF("BRV : " + format, param);
+        Say.LogF("RCV : " + format, param);
     }
 
     @Override
     public void onReceive(Context context, Intent intent) {
-        log("onReceive");
+        //log("onReceive");
         if (owner != null) {
             owner.onReceive(context, intent);
         }

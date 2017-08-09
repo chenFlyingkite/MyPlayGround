@@ -8,6 +8,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
 import android.os.BatteryManager;
+import android.os.Build;
 import android.os.IBinder;
 import android.widget.RemoteViews;
 
@@ -23,20 +24,19 @@ public class BatteryService extends Service {
     private BatteryManager btMgr;
 
     private void log(String format, Object... param) {
-        Say.LogF("BTY : " + format, param);
+        Say.LogF("BSV : " + format, param);
     }
 
     @Override
     public void onCreate() {
         log("onCreate");
 
-
         startForeground(NOTIF_BATTERY, createMyNotif(null));
 
         receiver = new SimpleReceiver();
         receiver.setOwner(owner);
-        IntentFilter battery = new IntentFilter(Intent.ACTION_BATTERY_CHANGED);
 
+        IntentFilter battery = new IntentFilter(Intent.ACTION_BATTERY_CHANGED);
         registerReceiver(receiver, battery);
     }
 
@@ -50,44 +50,39 @@ public class BatteryService extends Service {
 
     private int getIntProp(int id) {
         int x = 0;
-        //if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
-        if (btMgr == null) {
-            btMgr = (BatteryManager) getSystemService(Context.BATTERY_SERVICE);
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+            if (btMgr == null) {
+                btMgr = (BatteryManager) getSystemService(Context.BATTERY_SERVICE);
+            }
+            if (btMgr != null) {
+                x = btMgr.getIntProperty(id);
+            }
         }
-        if (btMgr != null) {
-            x = btMgr.getIntProperty(id);
-        }
-        //}
         return x;
     }
 
     private Notification createMyNotif(Intent intent) {
-        log("intent = %s", intent);
         String now = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss.SSS", Locale.US).format(new Date());
         int tmp = getInt(intent, BatteryManager.EXTRA_TEMPERATURE, 0);
         int vol = getInt(intent, BatteryManager.EXTRA_VOLTAGE, 0);
         //int icon = getInt(intent, BatteryManager.EXTRA_ICON_SMALL, R.mipmap.ic_launcher);
 
         int uA_now = getIntProp(BatteryManager.BATTERY_PROPERTY_CURRENT_NOW);
-        int ua_avg = getIntProp(BatteryManager.BATTERY_PROPERTY_CURRENT_AVERAGE);
 
-
-        log("uA = %s, %s", ua_avg, uA_now);
+        //log("uA = %s", uA_now);
         RemoteViews myRv = new RemoteViews(getPackageName(), R.layout.view_notification);
         myRv.setTextViewText(R.id.notifHeader, "Time = " + now);
         //myRv.setImageViewResource(R.id.notifIcon, icon);
         myRv.setOnClickPendingIntent(R.id.notifMain, PendingIntent.getActivity(this, 0, new Intent(this, MainActivity.class), PendingIntent.FLAG_UPDATE_CURRENT));
-        myRv.setTextViewText(R.id.notifTemperature, String.format(Locale.US, "%.1f 'C", tmp * 0.1));
+        myRv.setTextViewText(R.id.notifTemperature, String.format(Locale.US, "%.1f °C", tmp * 0.1));
         myRv.setTextViewText(R.id.notifVoltage, String.format(Locale.US, "%s mV", vol));
         myRv.setTextViewText(R.id.notifCurrent, String.format(Locale.US, "%.3f mA", uA_now * 0.001));
-        //myRv.setTextViewText(R.id.notifCurrent2, String.format(Locale.US, "%.2f mA", ua_avg * 0.001));
 
-        Notification b = new Notification.Builder(this)
-            .setSmallIcon(R.mipmap.ic_launcher)
-            //.setCustomBigContentView(myRv)
-            .setContent(myRv)
-            .build();
-        return b;
+        return new Notification.Builder(this)
+                .setSmallIcon(R.drawable.ic_thumb_up_white_48dp)
+                //.setSmallIcon(R.mipmap.ic_launcher)
+                .setContent(myRv)
+                .build();
     }
 
     private SimpleReceiver.Owner owner = new SimpleReceiver.Owner() {
@@ -96,7 +91,9 @@ public class BatteryService extends Service {
             Notification b = createMyNotif(intent);
 
             NotificationManager nm = (NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE);
-            nm.notify(NOTIF_BATTERY, b);
+            if (nm != null) {
+                nm.notify(NOTIF_BATTERY, b);
+            }
             Say.LogF("new notif sent");
         }
     };
