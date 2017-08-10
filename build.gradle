@@ -18,6 +18,14 @@ allprojects {
     repositories {
         google()
         jcenter()
+        maven {
+            url "https://jitpack.io"
+        }
+    }
+
+    ext {
+        supportLibraryVersion = "25.0.1"
+        googlePlayServiceVersion = "9.8.0"
     }
 }
 

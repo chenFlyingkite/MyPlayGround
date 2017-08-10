@@ -5,7 +5,8 @@
     android:orientation="vertical"
     android:id="@+id/notifMain"
     android:layout_width="match_parent"
-    android:layout_height="50dp">
+    android:layout_height="50dp"
+    android:background="@android:color/holo_green_light">
 
     <ImageView
         android:id="@+id/notifIcon"
@@ -31,7 +32,7 @@
         android:layout_below="@id/notifHeader"
         style="@style/baseText"
         android:textSize="26sp"
-        tools:text="30.0 C"/>
+        tools:text="30.0 °C"/>
 
     <LinearLayout
         android:layout_toEndOf="@id/notifTemperature"

@@ -12,13 +12,6 @@
         android:layout_height="match_parent"
         android:text="Start"/>
 
-    <ImageView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_centerInParent="true"
-        android:background="#000"
-        android:src="@drawable/ic_thumb_up_white_48dp"/>
-
     <Button
         android:id="@+id/myFinish"
         android:layout_alignParentEnd="true"
@@ -26,5 +19,45 @@
         android:layout_height="match_parent"
         android:backgroundTint="#0f0"
         android:text="Stop"/>
+
+    <ImageView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        android:background="#000"
+        android:visibility="gone"
+        android:src="@drawable/ic_thumb_up_white_48dp"/>
+
+    <LinearLayout
+        android:id="@+id/values"
+        android:layout_width="match_parent"
+        android:layout_height="100dp"
+        android:orientation="horizontal"
+        android:layout_toEndOf="@id/myBattery"
+        android:layout_toStartOf="@id/myFinish"
+        android:layout_alignParentBottom="true">
+        <TextView
+            android:id="@+id/chartX"
+            android:layout_weight="1"
+            android:text="X = --"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"/>
+        <TextView
+            android:id="@+id/chartY"
+            android:layout_weight="1"
+            android:text="Y = --"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"/>
+    </LinearLayout>
+
+    <com.github.mikephil.charting.charts.LineChart
+        android:id="@+id/chart"
+        android:layout_toEndOf="@id/myBattery"
+        android:layout_toStartOf="@id/myFinish"
+        android:layout_marginEnd="50dp"
+        android:layout_above="@id/values"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"/>
 
 </RelativeLayout>
