@@ -58,7 +58,9 @@ public class MainActivity extends Activity {
                 finish();
             }
         });
+    }
 
+    private void initChart() {
         chart = (LineChart) findViewById(R.id.chart);
         chartX = (TextView) findViewById(R.id.chartX);
         chartY = (TextView) findViewById(R.id.chartY);
@@ -104,6 +106,7 @@ public class MainActivity extends Activity {
                 Say.Log("fit screen");
                 //chart.resetZoom();
                 chart.fitScreen();
+                chart.animateXY(200, 200);
                 //chart.resetViewPortOffsets();
                 //chart.invalidate();
             }

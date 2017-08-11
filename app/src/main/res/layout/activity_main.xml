@@ -33,31 +33,33 @@
         android:id="@+id/values"
         android:layout_width="match_parent"
         android:layout_height="100dp"
-        android:orientation="horizontal"
         android:layout_toEndOf="@id/myBattery"
         android:layout_toStartOf="@id/myFinish"
-        android:layout_alignParentBottom="true">
+        android:layout_alignParentBottom="true"
+        android:visibility="gone"
+        android:orientation="horizontal">
         <TextView
             android:id="@+id/chartX"
             android:layout_weight="1"
-            android:text="X = --"
+            android:text="X = - -"
             android:layout_width="0dp"
             android:layout_height="match_parent"/>
         <TextView
             android:id="@+id/chartY"
             android:layout_weight="1"
-            android:text="Y = --"
+            android:text="Y = - -"
             android:layout_width="0dp"
             android:layout_height="match_parent"/>
     </LinearLayout>
 
     <com.github.mikephil.charting.charts.LineChart
         android:id="@+id/chart"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginEnd="50dp"
         android:layout_toEndOf="@id/myBattery"
         android:layout_toStartOf="@id/myFinish"
-        android:layout_marginEnd="50dp"
         android:layout_above="@id/values"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"/>
+        android:visibility="gone"/>
 
 </RelativeLayout>

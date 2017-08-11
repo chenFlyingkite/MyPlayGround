@@ -70,13 +70,19 @@ public class BatteryService extends Service {
         int uA_now = getIntProp(BatteryManager.BATTERY_PROPERTY_CURRENT_NOW);
 
         //log("uA = %s", uA_now);
+        log("%s, %s, %s, %s"
+                , getString(R.string.notificationTitle, now)
+                , getString(R.string.notificationTemperature, tmp * 0.1F)
+                , getString(R.string.notificationVoltage, vol * 1F)
+                , getString(R.string.notificationCurrent, uA_now * 0.001F)
+        );
         RemoteViews myRv = new RemoteViews(getPackageName(), R.layout.view_notification);
-        myRv.setTextViewText(R.id.notifHeader, "Time = " + now);
+        myRv.setTextViewText(R.id.notifHeader, getString(R.string.notificationTitle, now));
         //myRv.setImageViewResource(R.id.notifIcon, icon);
         myRv.setOnClickPendingIntent(R.id.notifMain, PendingIntent.getActivity(this, 0, new Intent(this, MainActivity.class), PendingIntent.FLAG_UPDATE_CURRENT));
-        myRv.setTextViewText(R.id.notifTemperature, String.format(Locale.US, "%.1f °C", tmp * 0.1));
-        myRv.setTextViewText(R.id.notifVoltage, String.format(Locale.US, "%s mV", vol));
-        myRv.setTextViewText(R.id.notifCurrent, String.format(Locale.US, "%.3f mA", uA_now * 0.001));
+        myRv.setTextViewText(R.id.notifTemperature, getString(R.string.notificationTemperature, tmp * 0.1F));
+        myRv.setTextViewText(R.id.notifVoltage, getString(R.string.notificationVoltage, vol * 1F));
+        myRv.setTextViewText(R.id.notifCurrent, getString(R.string.notificationCurrent, uA_now * 0.001F));
 
         return new Notification.Builder(this)
                 .setSmallIcon(R.drawable.ic_thumb_up_white_48dp)
@@ -94,7 +100,6 @@ public class BatteryService extends Service {
             if (nm != null) {
                 nm.notify(NOTIF_BATTERY, b);
             }
-            Say.LogF("new notif sent");
         }
     };
 

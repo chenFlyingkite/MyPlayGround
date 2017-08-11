@@ -1,3 +1,8 @@
 <resources>
     <string name="app_name">MyBattery</string>
+
+    <string name="notificationTitle">Time = %s</string>
+    <string name="notificationTemperature">%.1f °C</string>
+    <string name="notificationVoltage">%.1f mV</string>
+    <string name="notificationCurrent">%.1f mA</string>
 </resources>
