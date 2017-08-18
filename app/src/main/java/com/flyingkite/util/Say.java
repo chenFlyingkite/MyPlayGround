@@ -12,4 +12,8 @@ public class Say {
     public static void LogF(String format, Object... params) {
         Log(String.format(format, params));
     }
+
+    public static String ox(boolean b) {
+        return b ? "o" : "x";
+    }
 }

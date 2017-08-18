@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <EditText
+        android:id="@+id/editText"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:imeOptions="actionNext"
+        android:hint="Edit"/>
+
+    <AutoCompleteTextView
+        android:id="@+id/editTextAu"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:inputType="textAutoComplete"
+        android:imeOptions="actionNext"
+        android:maxLines="1"
+        android:hint="Auto"/>
+
+    <AutoCompleteTextView
+        android:id="@+id/editTextEm"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:inputType="textEmailAddress"
+        android:imeOptions="actionNext"
+        android:maxLines="1"
+        android:hint="Auto Email"/>
+
+    <Button
+        android:id="@+id/clearText"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Clear All"/>
+</LinearLayout>
