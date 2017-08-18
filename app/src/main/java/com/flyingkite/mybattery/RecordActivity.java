@@ -1,5 +1,6 @@
 package com.flyingkite.mybattery;
 
+import android.annotation.TargetApi;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
@@ -8,6 +9,7 @@ import android.hardware.display.VirtualDisplay;
 import android.media.MediaRecorder;
 import android.media.projection.MediaProjection;
 import android.media.projection.MediaProjectionManager;
+import android.os.Build;
 import android.os.Bundle;
 import android.os.Environment;
 import android.util.DisplayMetrics;
@@ -59,6 +61,7 @@ public class RecordActivity extends Activity {
         mMediaProjectionCallback = new MediaProjectionCallback();
     }
 
+    @TargetApi(Build.VERSION_CODES.LOLLIPOP)
     @Override
     public void onDestroy() {
         super.onDestroy();
@@ -68,6 +71,7 @@ public class RecordActivity extends Activity {
         }
     }
 
+    @TargetApi(Build.VERSION_CODES.LOLLIPOP)
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         if (requestCode != PERMISSION_CODE) {
@@ -99,6 +103,7 @@ public class RecordActivity extends Activity {
         }
     }
 
+    @TargetApi(Build.VERSION_CODES.LOLLIPOP)
     private void shareScreen() {
         if (mMediaProjection == null) {
             startActivityForResult(mProjectionManager.createScreenCaptureIntent(), PERMISSION_CODE);
@@ -116,6 +121,7 @@ public class RecordActivity extends Activity {
         //mMediaRecorder.release();
     }
 
+    @TargetApi(Build.VERSION_CODES.LOLLIPOP)
     private VirtualDisplay createVirtualDisplay() {
         return mMediaProjection.createVirtualDisplay("MainActivity",
                 DISPLAY_WIDTH, DISPLAY_HEIGHT, mScreenDensity,
@@ -123,6 +129,7 @@ public class RecordActivity extends Activity {
                 mMediaRecorder.getSurface(), null /*Callbacks*/, null /*Handler*/);
     }
 
+    @TargetApi(Build.VERSION_CODES.LOLLIPOP)
     private class MediaProjectionCallback extends MediaProjection.Callback {
         @Override
         public void onStop() {
