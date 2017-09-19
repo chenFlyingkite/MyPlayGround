@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">MyBattery</string>
+    <string name="app_name">MyPlayGround</string>
 
     <string name="notificationTitle">Time = %s</string>
     <string name="notificationTemperature">%.1f °C</string>
