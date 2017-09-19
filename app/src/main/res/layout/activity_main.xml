@@ -51,6 +51,20 @@
             android:backgroundTint="#0a0"
             android:text="Use Pages"/>
 
+        <Button
+            android:id="@+id/goPIP"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:backgroundTint="#0aa"
+            android:text="Use PIP"/>
+
+        <Button
+            android:id="@+id/tester"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:backgroundTint="#4a0a"
+            android:text="Close screen"/>
+
     </LinearLayout>
 
 </RelativeLayout>

@@ -1,6 +1,5 @@
-package com.flyingkite.mybattery;
+package com.flyingkite.mybattery.page;
 
-import android.app.Activity;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.design.widget.TabLayout;
@@ -8,7 +7,11 @@ import android.support.v4.view.PagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.widget.TextView;
 
-public class PagesActivity extends Activity {
+import com.flyingkite.mybattery.BaseActivity;
+import com.flyingkite.mybattery.R;
+import com.flyingkite.mybattery.page.host.MyPagerAdapter;
+
+public class PagesActivity extends BaseActivity {
     private TabLayout tabs;
     private ViewPager pager;
 

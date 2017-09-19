@@ -9,15 +9,31 @@
 
     <uses-permission android:name="android.permission.RECORD_AUDIO"/>
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"/>
+    <uses-permission android:name="android.permission.INTERNET"/>
+    <uses-permission android:name="android.permission.WAKE_LOCK"/>
 
     <application
+        android:name="android.support.multidex.MultiDexApplication"
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".MainActivity">
+        <activity
+            android:name=".MainActivity"
+            android:configChanges="screenSize|smallestScreenSize|screenLayout|orientation"
+            android:supportsPictureInPicture="true"
+            android:resizeableActivity="true">
+            <layout android:defaultHeight="480dp"
+                    android:defaultWidth="360dp" />
+            <!--
+
+                    android:gravity="top|end"
+                    android:minimalHeight="90dp"
+                    android:minimalWidth="160dp"
+            -->
+
             <intent-filter>
                 <action android:name="android.intent.action.MAIN"/>
 
@@ -25,11 +41,11 @@
             </intent-filter>
         </activity>
 
-        <service android:name=".BatteryService"/>
-        <receiver android:name=".SimpleReceiver"/>
+        <service android:name=".battery.BatteryService"/>
+        <receiver android:name=".battery.SimpleReceiver"/>
 
         <activity android:name=".RecordActivity"/>
-        <activity android:name=".PagesActivity"/>
+        <activity android:name=".page.PagesActivity"/>
     </application>
 
 </manifest>

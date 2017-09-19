@@ -1,4 +1,4 @@
-package com.flyingkite.mybattery;
+package com.flyingkite.mybattery.page;
 
 import android.graphics.Color;
 import android.os.Bundle;
@@ -6,6 +6,8 @@ import android.support.annotation.Nullable;
 import android.view.View;
 import android.widget.TextView;
 
+import com.flyingkite.mybattery.R;
+import com.flyingkite.mybattery.page.host.BaseFragment;
 import com.flyingkite.util.Say;
 import com.github.mikephil.charting.charts.LineChart;
 import com.github.mikephil.charting.data.Entry;

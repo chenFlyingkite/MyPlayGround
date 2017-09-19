@@ -1,6 +1,5 @@
 package com.flyingkite.mybattery;
 
-import android.annotation.TargetApi;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
@@ -21,7 +20,7 @@ import android.widget.ToggleButton;
 import java.io.File;
 import java.io.IOException;
 
-public class RecordActivity extends Activity {
+public class RecordActivity extends BaseActivity {
 
     private static final String TAG = "MainActivity";
     private static final int PERMISSION_CODE = 1;
@@ -31,7 +30,7 @@ public class RecordActivity extends Activity {
     private static final int DISPLAY_HEIGHT = 640;
     private MediaProjection mMediaProjection;
     private VirtualDisplay mVirtualDisplay;
-    private MediaProjectionCallback mMediaProjectionCallback;
+    private MediaProjection.Callback mMediaProjectionCallback;
     private ToggleButton mToggleButton;
     private MediaRecorder mMediaRecorder;
 
@@ -58,20 +57,23 @@ public class RecordActivity extends Activity {
             }
         });
 
-        mMediaProjectionCallback = new MediaProjectionCallback();
+        //mMediaProjectionCallback = new MediaProjectionCallback();
+        mMediaProjectionCallback = mCallback;
     }
 
-    @TargetApi(Build.VERSION_CODES.LOLLIPOP)
+    //@TargetApi(Build.VERSION_CODES.LOLLIPOP)
     @Override
     public void onDestroy() {
         super.onDestroy();
         if (mMediaProjection != null) {
-            mMediaProjection.stop();
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+                mMediaProjection.stop();
+            }
             mMediaProjection = null;
         }
     }
 
-    @TargetApi(Build.VERSION_CODES.LOLLIPOP)
+    //@TargetApi(Build.VERSION_CODES.LOLLIPOP)
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         if (requestCode != PERMISSION_CODE) {
@@ -84,8 +86,10 @@ public class RecordActivity extends Activity {
             mToggleButton.setChecked(false);
             return;
         }
-        mMediaProjection = mProjectionManager.getMediaProjection(resultCode, data);
-        mMediaProjection.registerCallback(mMediaProjectionCallback, null);
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+            mMediaProjection = mProjectionManager.getMediaProjection(resultCode, data);
+            mMediaProjection.registerCallback(mMediaProjectionCallback, null);
+        }
         mVirtualDisplay = createVirtualDisplay();
         mMediaRecorder.start();
     }
@@ -103,10 +107,12 @@ public class RecordActivity extends Activity {
         }
     }
 
-    @TargetApi(Build.VERSION_CODES.LOLLIPOP)
+    //@TargetApi(Build.VERSION_CODES.LOLLIPOP)
     private void shareScreen() {
         if (mMediaProjection == null) {
-            startActivityForResult(mProjectionManager.createScreenCaptureIntent(), PERMISSION_CODE);
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+                startActivityForResult(mProjectionManager.createScreenCaptureIntent(), PERMISSION_CODE);
+            }
             return;
         }
         mVirtualDisplay = createVirtualDisplay();
@@ -121,15 +127,36 @@ public class RecordActivity extends Activity {
         //mMediaRecorder.release();
     }
 
-    @TargetApi(Build.VERSION_CODES.LOLLIPOP)
+    //@TargetApi(Build.VERSION_CODES.LOLLIPOP)
     private VirtualDisplay createVirtualDisplay() {
-        return mMediaProjection.createVirtualDisplay("MainActivity",
-                DISPLAY_WIDTH, DISPLAY_HEIGHT, mScreenDensity,
-                DisplayManager.VIRTUAL_DISPLAY_FLAG_AUTO_MIRROR,
-                mMediaRecorder.getSurface(), null /*Callbacks*/, null /*Handler*/);
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+            return mMediaProjection.createVirtualDisplay("MainActivity",
+                    DISPLAY_WIDTH, DISPLAY_HEIGHT, mScreenDensity,
+                    DisplayManager.VIRTUAL_DISPLAY_FLAG_AUTO_MIRROR,
+                    mMediaRecorder.getSurface(), null /*Callbacks*/, null /*Handler*/);
+        }
+        return null;
     }
 
-    @TargetApi(Build.VERSION_CODES.LOLLIPOP)
+    //@TargetApi(Build.VERSION_CODES.LOLLIPOP)
+    private MediaProjection.Callback mCallback = new MediaProjection.Callback() {
+        @Override
+        public void onStop() {
+            if (mToggleButton.isChecked()) {
+                mToggleButton.setChecked(false);
+                mMediaRecorder.stop();
+                mMediaRecorder.reset();
+                Log.v(TAG, "Recording Stopped");
+                initRecorder();
+                prepareRecorder();
+            }
+            mMediaProjection = null;
+            stopScreenSharing();
+            Log.i(TAG, "MediaProjection Stopped");
+        }
+    };
+
+    /*
     private class MediaProjectionCallback extends MediaProjection.Callback {
         @Override
         public void onStop() {
@@ -146,6 +173,7 @@ public class RecordActivity extends Activity {
             Log.i(TAG, "MediaProjection Stopped");
         }
     }
+    */
 
     private void prepareRecorder() {
         try {
@@ -169,9 +197,13 @@ public class RecordActivity extends Activity {
         mMediaRecorder.setVideoFrameRate(30);
         mMediaRecorder.setVideoSize(DISPLAY_WIDTH, DISPLAY_HEIGHT);
         File folder = Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_MOVIES);
+        if (folder.exists() && !folder.isDirectory()) {
+            folder.delete();
+        }
+        folder.mkdir();
         File movie = new File(folder, "capture.mp4");
         if (movie.exists()) {
-            //movie.delete();
+            movie.delete();
         }
         try {
             movie.createNewFile();

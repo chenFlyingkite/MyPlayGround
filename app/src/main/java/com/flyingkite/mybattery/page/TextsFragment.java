@@ -1,4 +1,4 @@
-package com.flyingkite.mybattery;
+package com.flyingkite.mybattery.page;
 
 import android.accounts.Account;
 import android.accounts.AccountManager;
@@ -12,6 +12,8 @@ import android.widget.ArrayAdapter;
 import android.widget.AutoCompleteTextView;
 import android.widget.TextView;
 
+import com.flyingkite.mybattery.R;
+import com.flyingkite.mybattery.page.host.BaseFragment;
 import com.flyingkite.util.Say;
 
 import java.util.HashSet;

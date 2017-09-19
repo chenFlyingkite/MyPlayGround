@@ -1,4 +1,4 @@
-package com.flyingkite.mybattery;
+package com.flyingkite.mybattery.page.host;
 
 import android.app.Fragment;
 import android.app.FragmentManager;
@@ -8,7 +8,7 @@ import android.view.View;
 import android.view.ViewGroup;
 
 public class MyPagerAdapter extends PagerAdapter {
-    public static final MyPages[] PAGES = {MyPages.TEXTS, MyPages.CHART, MyPages.CHART, MyPages.NONE, MyPages.CHART};
+    public static final MyPages[] PAGES = {MyPages.JSON, MyPages.TEXTS, MyPages.CHART, MyPages.CHART, MyPages.NONE, MyPages.CHART};
 
     private static final String TAG = "MyPagerAdapter";
     private static final boolean DEBUG = false;

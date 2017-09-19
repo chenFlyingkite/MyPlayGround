@@ -1,4 +1,4 @@
-package com.flyingkite.mybattery;
+package com.flyingkite.mybattery.battery;
 
 import android.content.BroadcastReceiver;
 import android.content.Context;

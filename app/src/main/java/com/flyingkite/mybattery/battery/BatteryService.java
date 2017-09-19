@@ -1,4 +1,4 @@
-package com.flyingkite.mybattery;
+package com.flyingkite.mybattery.battery;
 
 import android.app.Notification;
 import android.app.NotificationManager;
@@ -12,6 +12,8 @@ import android.os.Build;
 import android.os.IBinder;
 import android.widget.RemoteViews;
 
+import com.flyingkite.mybattery.MainActivity;
+import com.flyingkite.mybattery.R;
 import com.flyingkite.util.Say;
 
 import java.text.SimpleDateFormat;
@@ -62,7 +64,9 @@ public class BatteryService extends Service {
     }
 
     private Notification createMyNotif(Intent intent) {
-        String now = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss.SSS", Locale.US).format(new Date());
+        Date nowD = new Date();
+        String now = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss.SSS", Locale.US).format(nowD);
+        String nov = new SimpleDateFormat("yyyy-MM-dd'T'hh:mm:ss.SSS", Locale.US).format(nowD);
         int tmp = getInt(intent, BatteryManager.EXTRA_TEMPERATURE, 0);
         int vol = getInt(intent, BatteryManager.EXTRA_VOLTAGE, 0);
         //int icon = getInt(intent, BatteryManager.EXTRA_ICON_SMALL, R.mipmap.ic_launcher);
@@ -70,11 +74,11 @@ public class BatteryService extends Service {
         int uA_now = getIntProp(BatteryManager.BATTERY_PROPERTY_CURRENT_NOW);
 
         //log("uA = %s", uA_now);
-        log("%s, %s, %s, %s"
-                , getString(R.string.notificationTitle, now)
-                , getString(R.string.notificationTemperature, tmp * 0.1F)
-                , getString(R.string.notificationVoltage, vol * 1F)
-                , getString(R.string.notificationCurrent, uA_now * 0.001F)
+        log("TimeTVA = ,%s,%.1f,%.1f,%.3f"
+                , nov//, getString(R.string.notificationTitle, now)
+                , tmp * 0.1F//, getString(R.string.notificationTemperature, tmp * 0.1F)
+                , vol * 1F//, getString(R.string.notificationVoltage, vol * 1F)
+                , uA_now * 0.001F//getString(R.string.notificationCurrent, uA_now * 0.001F)
         );
         RemoteViews myRv = new RemoteViews(getPackageName(), R.layout.view_notification);
         myRv.setTextViewText(R.id.notifHeader, getString(R.string.notificationTitle, now));
