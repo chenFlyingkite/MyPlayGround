@@ -1,4 +1,4 @@
-package com.flyingkite.mybattery;
+package com.flyingkite.myplayground;
 
 import android.content.Context;
 import android.content.Intent;
@@ -11,8 +11,8 @@ import android.view.View;
 import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
-import com.flyingkite.mybattery.battery.BatteryService;
-import com.flyingkite.mybattery.page.PagesActivity;
+import com.flyingkite.myplayground.battery.BatteryService;
+import com.flyingkite.myplayground.page.PagesActivity;
 import com.flyingkite.util.Say;
 
 import java.io.File;

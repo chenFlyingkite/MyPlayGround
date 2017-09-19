@@ -1,9 +1,9 @@
-package com.flyingkite.mybattery.page.json;
+package com.flyingkite.myplayground.page.json;
 
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
 
-import com.flyingkite.mybattery.data.Card;
+import com.flyingkite.myplayground.data.Card;
 
 public class CardLibrary {
     private RecyclerView recycler;

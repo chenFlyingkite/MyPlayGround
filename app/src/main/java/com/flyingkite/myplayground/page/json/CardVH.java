@@ -1,12 +1,12 @@
-package com.flyingkite.mybattery.page.json;
+package com.flyingkite.myplayground.page.json;
 
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.flyingkite.mybattery.R;
-import com.flyingkite.mybattery.data.Card;
+import com.flyingkite.myplayground.R;
+import com.flyingkite.myplayground.data.Card;
 
 class CardVH extends RecyclerView.ViewHolder {
     private Card card;

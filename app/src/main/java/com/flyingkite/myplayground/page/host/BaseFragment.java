@@ -1,4 +1,4 @@
-package com.flyingkite.mybattery.page.host;
+package com.flyingkite.myplayground.page.host;
 
 import android.app.Fragment;
 import android.os.Bundle;

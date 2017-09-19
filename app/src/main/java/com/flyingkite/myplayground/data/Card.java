@@ -1,4 +1,4 @@
-package com.flyingkite.mybattery.data;
+package com.flyingkite.myplayground.data;
 
 
 public class Card {

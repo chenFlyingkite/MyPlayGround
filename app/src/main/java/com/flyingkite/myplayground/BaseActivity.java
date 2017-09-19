@@ -1,4 +1,4 @@
-package com.flyingkite.mybattery;
+package com.flyingkite.myplayground;
 
 import android.Manifest;
 import android.app.Activity;

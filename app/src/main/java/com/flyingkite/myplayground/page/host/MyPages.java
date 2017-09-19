@@ -1,10 +1,10 @@
-package com.flyingkite.mybattery.page.host;
+package com.flyingkite.myplayground.page.host;
 
 import android.app.Fragment;
 
-import com.flyingkite.mybattery.page.ChartFragment;
-import com.flyingkite.mybattery.page.JsonFragment;
-import com.flyingkite.mybattery.page.TextsFragment;
+import com.flyingkite.myplayground.page.ChartFragment;
+import com.flyingkite.myplayground.page.JsonFragment;
+import com.flyingkite.myplayground.page.TextsFragment;
 
 public enum MyPages {
     CHART,

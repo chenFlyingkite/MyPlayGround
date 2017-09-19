@@ -1,4 +1,4 @@
-package com.flyingkite.mybattery.page;
+package com.flyingkite.myplayground.page;
 
 import android.os.Bundle;
 import android.os.Environment;
@@ -10,10 +10,10 @@ import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.Spinner;
 
-import com.flyingkite.mybattery.R;
-import com.flyingkite.mybattery.data.Card;
-import com.flyingkite.mybattery.page.host.BaseFragment;
-import com.flyingkite.mybattery.page.json.CardLibrary;
+import com.flyingkite.myplayground.R;
+import com.flyingkite.myplayground.data.Card;
+import com.flyingkite.myplayground.page.host.BaseFragment;
+import com.flyingkite.myplayground.page.json.CardLibrary;
 import com.flyingkite.util.IOUtil;
 import com.flyingkite.util.Say;
 import com.google.gson.Gson;

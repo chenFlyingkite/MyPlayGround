@@ -1,4 +1,4 @@
-package com.flyingkite.mybattery.page.json;
+package com.flyingkite.myplayground.page.json;
 
 import android.content.Context;
 import android.support.v7.widget.RecyclerView;
@@ -7,8 +7,8 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.bumptech.glide.Glide;
-import com.flyingkite.mybattery.R;
-import com.flyingkite.mybattery.data.Card;
+import com.flyingkite.myplayground.R;
+import com.flyingkite.myplayground.data.Card;
 import com.flyingkite.util.Say;
 import com.squareup.picasso.Picasso;
 

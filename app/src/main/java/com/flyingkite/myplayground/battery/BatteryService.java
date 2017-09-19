@@ -1,4 +1,4 @@
-package com.flyingkite.mybattery.battery;
+package com.flyingkite.myplayground.battery;
 
 import android.app.Notification;
 import android.app.NotificationManager;
@@ -12,8 +12,8 @@ import android.os.Build;
 import android.os.IBinder;
 import android.widget.RemoteViews;
 
-import com.flyingkite.mybattery.MainActivity;
-import com.flyingkite.mybattery.R;
+import com.flyingkite.myplayground.MainActivity;
+import com.flyingkite.myplayground.R;
 import com.flyingkite.util.Say;
 
 import java.text.SimpleDateFormat;
