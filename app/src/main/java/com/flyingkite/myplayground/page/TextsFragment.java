@@ -12,6 +12,7 @@ import android.widget.ArrayAdapter;
 import android.widget.AutoCompleteTextView;
 import android.widget.TextView;
 
+import com.flyingkite.library.TextAutoRun;
 import com.flyingkite.myplayground.R;
 import com.flyingkite.myplayground.page.host.BaseFragment;
 import com.flyingkite.util.Say;
@@ -44,7 +45,7 @@ public class TextsFragment extends BaseFragment {
             @Override
             public void afterTextChanged(Editable s) {
                 Say.LogF("did change : %s", s);
-                auto.showDropDown();
+                //auto.showDropDown();
                 //emai.showDropDown();
             }
         };
@@ -52,7 +53,7 @@ public class TextsFragment extends BaseFragment {
             @Override
             public void beforeTextChanged(CharSequence s, int start, int count, int after) {
                 Say.LogF("2 will change : %s", s);
-                emai.showDropDown();
+                //emai.showDropDown();
             }
 
             @Override
@@ -94,14 +95,6 @@ public class TextsFragment extends BaseFragment {
                 emai.showDropDown();
             }
         });
-        /*
-        emai.postDelayed(new Runnable() {
-            @Override
-            public void run() {
-                emai.showDropDown();
-            }
-        }, 300);
-        */
 
         findViewById(R.id.clearText).setOnClickListener(new View.OnClickListener() {
             @Override
@@ -113,6 +106,11 @@ public class TextsFragment extends BaseFragment {
             }
         });
         //Say.Log("s = " + Arrays.toString(getDeviceEmails()));
+        TextView v = (TextView) findViewById(R.id.autoSizeText);
+        //TextViewCompat.setAutoSizeTextTypeWithDefaults(v, TextViewCompat.AUTO_SIZE_TEXT_TYPE_UNIFORM);
+        //TextViewCompat.setAutoSizeTextTypeUniformWithConfiguration(v, 2, 100, 1, TypedValue.COMPLEX_UNIT_PX);
+        Say.Log("run auto size");
+        new TextAutoRun(v).run();
     }
 
     private String[] getDeviceEmails(){

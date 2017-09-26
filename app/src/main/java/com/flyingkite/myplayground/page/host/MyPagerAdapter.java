@@ -42,10 +42,10 @@ public class MyPagerAdapter extends PagerAdapter {
         Fragment fragment = mFragmentManager.findFragmentByTag(name);
         if (fragment != null) {
             if (DEBUG) Log.v(TAG, "Attaching item #" + itemId + ": f=" + fragment);
-            //mCurTransaction.attach(fragment);
-            mFragmentManager.beginTransaction()
-                    .replace(container.getId(), fragment, name)
-                    .commitAllowingStateLoss();
+            // No adding again since it already exists
+//            mFragmentManager.beginTransaction()
+//                    .replace(container.getId(), fragment, name)
+//                    .commitAllowingStateLoss();
         } else {
             if (DEBUG) Log.v(TAG, "Adding item #" + itemId + ": f=" + fragment);
             fragment = getItem(position);
